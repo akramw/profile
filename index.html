@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="Console.png">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+    
+    a {
+        color: #001C55;
+    }
+    
+    body {
+        background-color: #ffffff;
+        font-family: "Open Sans", sans-serif;
+    }
+    
+    .navbar {
+        padding-bottom: 10px;
+        overflow: hidden;
+        background-color: #ffffff;
+    }
+    
+    .main-nav {
+        list-style-type: none;
+        display: none;
+    }
+    
+    .nav-links,
+    .logo {
+        text-decoration: none;
+        color: rgb(0, 28, 85, 1.0);
+        font-family: "Open Sans", sans-serif;
+        text-align: center;
+        -webkit-font-smoothing: antialiased;
+        text-decoration: none;
+        font-size: 4.0vw;
+        font-weight: 500;
+        font-stretch: 130%;
+        line-height: normal;
+        display: inline-block;
+        padding: 38px
+    }
+    
+    .nav-links:hover {
+        font-weight: 800;
+    }
+    
+    .main-nav li {
+        text-align: center;
+        margin-top: -15px;
+    }
+    
+    .logo {
+        display: inline-block;
+        padding: 17px 10px;
+        font-size: 22px;
+    }
+    
+    .navbar-toggle {
+        position: absolute;
+        top: 30px;
+        right: 45px;
+        cursor: pointer;
+        color: #001C55;
+        font-size: 24px;
+    }
+    
+    .active {
+        display: block;
+    }
+    
+    #current {
+        display: block;
+        font-weight: 650;
+    }
+    
+    .image {
+        width: 100%;
+        text-align: center;
+        margin-top: -50px;
+    }
+    
+    .subimage p {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .bio {
+        width: 100%;
+        float: left;
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+    
+    @media screen and (min-width: 1500px) {
+        .nav-links {
+            font-size: 0.95vw;
+        }
+        .image {
+            width: 40%;
+            float: left;
+            margin-top: 0px;
+        }
+        .bio {
+            width: 60%;
+            float: left;
+            padding-right: 120px;
+            padding-left: 40px;
+        }
+        .subimage {
+            float: right;
+        }
+    }
+    
+    @media screen and (min-width: 800px) {
+        .image {
+            width: 40%;
+            float: left;
+            margin-top: 0px;
+        }
+        .bio {
+            width: 60%;
+            float: left;
+            padding-right: 120px;
+            padding-left: 40px;
+        }
+        .subimage {
+            float: right;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 0;
+            height: 70px;
+            align-items: center;
+        }
+        .main-nav {
+            display: flex;
+            margin-right: 30px;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+        .main-nav li {
+            margin: 0;
+        }
+        .nav-links {
+            margin-left: 0px;
+            margin-right: 0px;
+            padding: 17px 18px;
+            font-size: 1.0vw;
+        }
+        .logo {
+            margin-top: 0;
+        }
+        .navbar-toggle {
+            display: none;
+        }
+        .nav-links:hover {
+            background-color: rgb(166, 225, 250);
+        }
+        .navbar {
+            position: fixed;
+            right: 10px;
+            width: 95%;
+        }
+    }
+    
+    h1 {
+        color: #001C55;
+    }
+    
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 85px;
+        background-color: #333333;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.8em;
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 2;
+        bottom: 100%;
+        left: 100%;
+        margin-left: -64px;
+        margin-bottom: 3px;
+    }
+    
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+    
+    .modal {
+        position: fixed;
+        /* Stay in place */
+        z-index: 3;
+        /* Sit on top */
+        padding-top: 20px;
+        /* Location of the box */
+        padding-bottom: 20px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+    
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        width: 80%;
+    }
+    
+    .close {
+        color: #a6b8dd;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        margin-top: -15px;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: #001C55;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<head>
+    <title>Md Wasim Akram</title>
+</head>
+
+<body>
+    <div style="z-index: 1; position:fixed; background-color: #ffffff; width:100%; height:85px;">
+        <div style="margin-top: 10px; margin-left: 30px; margin-right: 25px;">
+            <nav class="navbar">
+                <span class="navbar-toggle" id="js-navbar-toggle">
+            <i class="fa fa-bars"></i>
+        </span>
+                <a href="#" class="logo">Md Wasim Akram</a>
+                <ul class="main-nav" id="js-menu">
+                    <li>
+                        <a href="#" class="nav-links" id="current">Home</a>
+                    </li>
+                    <li>
+                        <a href="#Education" class="nav-links">Education</a>
+                    </li>
+                    <li>
+                        <a href="#Skills" class="nav-links">Skills</a>
+                    </li>
+                    <li>
+                        <a href="#Projects" class="nav-links">Projects</a>
+                    </li>
+                    <li>
+                        <a href="#Certification" class="nav-links">Certification</a>
+                    </li>
+                    <li>
+                        <a href="#Experience" class="nav-links">Experience</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/rajibul007/portfolio/raw/main/rajibul_profile.pdf" class="nav-links" style="background-color: rgb(166,225,250,0.5);"><i class="fa fa-download"></i>&nbsp;&nbsp;Resume</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div style="text-align:center">
+        <div style="display:inline-block; padding-top: 100px; margin-right: 40px; margin-left: 40px;">
+            <div class="image" style="display:inline-block;">
+                <div class="subimage">
+                    <img src="wasim.jpeg" width="300px" style="margin-left: auto; margin-right: auto; display: block; margin-top:100px;">
+                    <p style="text-align:center;padding-top:20px; font-size:0.95em;color:#001C55; padding-right: 70px; padding-left: 70px; max-width:500px">Photo of me at the Boeing, taken April 2023</p>
+                </div>
+            </div>
+            <div class="bio" style="display:inline-block; margin-top:20px; font-size:1.2em;color:#001C55; max-width:900px; text-align: left;">
+                <h1 style="font-size:2.3em; text-align: center; min-width: 330px">Md Wasim Akram</h1><br>
+                <p style="margin-bottom:12px; min-width: 450px">Hi there! I'm currently rocking the role of Associate VMware Workspace ONE Administrator at @Boeing, Bengaluru, Karnataka, India. 🚀 Previously, I've had exhilarating stints at @Insight and @Wipro, where I honed my skills in VMware Workspace ONE Administrator and system management. 💼 My journey has been a fusion of innovation, automation, and a deep-seated passion for crafting secure and efficient VMware Workspace ONE Administrator role.</p>
+                <p style="margin-bottom:12px; min-width: 450px">💡 Equipped with a deep understanding of VMware technologies, I've architected robust workspace infrastructures, empowering businesses to embrace remote work, BYOD policies, and modern workplace trends. 🌐 Whether it's integrating identity management systems or fine-tuning access controls, I thrive on crafting tailored solutions that align with business objectives and regulatory requirements. 🚀 My commitment to staying at the forefront of industry trends drives me to continuously enhance my skills, ensuring that I can leverage the latest advancements to drive value for my team and organization...</p>
+                <p style="margin-bottom:12px; min-width: 450px">
+                    🤝 With a collaborative spirit ingrained in my approach, I flourish in dynamic settings, nurturing cross-functional teamwork and spearheading VMware Workspace ONE initiatives. ⚙️ Whether it involves automating mundane tasks, seamlessly integrating disparate systems, or crafting resilient infrastructure, I am driven by a fervor for enhancing efficiency and fostering innovation at every opportunity. 💬 Reach out and let's delve into how my amalgamation of technical proficiency, strategic foresight, and collaborative ethos can elevate the triumph of your endeavors and undertakings🚀.</p>
+                <!-- <div style="text-align:center; margin-top:25px;">
+                    <div id="movies" style="z-index: 0;text-align:center; display: inline-block;position:relative; width:230px; height: 50px; background-color:#CCF0FF;padding:10px;cursor: pointer;" onmouseover="shadow('movies')" onmouseout="unshadow('movies')" onclick="window.open('movies.html','_blank')">
+                        <p style="font-size:0.9em;color:#001C55;font-weight:600">Favorite Movies / TV</p><br>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div id="Contact" style="width:100%; text-align:center; float:left; padding-top:75px; margin-top:-30px; margin-bottom:0px;min-width:600px">
+        <h1 style="font-size:2.3em; text-align: center">Contact Me</h1><br>
+        <p style="font-size:1.1em; margin-bottom:15px;">Feel free to send a message on LinkedIn...<br> or send me an email at akramw574@gmail.com.</p>
+        <div class="tooltip">
+            <div style="z-index: 0;text-align:center; display: inline-block;position:relative; width:50px; height: 50px; padding:10px;cursor: pointer; font-size: 50px; margin-right:10px;" onmouseover="shadow('giticon')" onmouseout="unshadow('giticon')" onclick="window.open('https://https://www.github.com/akramw','_blank')">
+                <i id="giticon" class="fa fa-github" style="color:#001C55; border-radius: 100px; width:50px"></i>
+            </div>
+            <span class="tooltiptext" style="margin-bottom:-15px">GitHub</span>
+        </div>
+        <div class="tooltip">
+            <div style="z-index: 0;text-align:center; display: inline-block;position:relative; width:50px; height: 50px; padding:10px;cursor: pointer; font-size: 50px;margin-right:10px;" onmouseover="shadow('linkedinicon')" onmouseout="unshadow('linkedinicon')" onclick="window.open('https://www.linkedin.com/in/mdwasimakram','_blank')">
+                <i id="linkedinicon" class="fa fa-linkedin-square" style="color:#001C55; width:50px; border-radius:12px;"> </i>
+            </div>
+            <span class="tooltiptext" style="margin-bottom:-15px">LinkedIn</span>
+        </div>
+        <div class="tooltip">
+            <div style="z-index: 0;text-align:center; display: inline-block;position:relative; width:50px; height: 50px; padding:10px;cursor: pointer; font-size: 50px;margin-right:10px;" onmouseover="shadow('emailicon')" onmouseout="unshadow('emailicon')" onclick="window.open('mailto:akramw574@gmail.com')">
+                <i id="emailicon" class="fa fa-envelope" style="color:#001C55;cursor:pointer; width:60px; border-radius: 8px;"></i>
+            </div>
+            <span class="tooltiptext" style="margin-bottom:-15px;">Email</span>
+        </div>
+
+    </div>
+
+
+	<div id="Education" style="width:100%; text-align:center; padding-top:75px; margin-top:-30px; margin-bottom:-70px;min-width:600px;">
+        <h1 style="font-size:2.3em; text-align: center">Education</h1><br>
+        <div style="display: inline-block; width: 100%; margin-left:5px">
+            <div id="UMass2" style="max-width:1400px;z-index: 0; text-align:left; display: inline-block;position:relative; width:90%; height: 180px; margin-left:10px; margin-right:10px;background-color:rgb(166,225,250);padding: 30px;min-width:600px">
+                <img src="https://img.icons8.com/windows/64/000000/university.png" width="30px" style="float:left" />
+                <p style="width:90%; float:left;font-size:1.4em;margin-left:4px;color:#001C55;font-weight:600">West Bengal University of Technology</p><br>
+                <p style="width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:600">Bachelor of Technology</p><br>
+                <p style="width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:600">Information Technology</p><br>
+                <p style="width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:100">2016 PassOut 
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p><br>
+            </div>
+            <div id="UMassClick2" style="max-width:1400px;min-width:600px;z-index: 0; text-align:left; display: inline-block;position:relative; width:90%; height: 45px; margin-left:10px; margin-right:10px;background-color:#CCF0FF; margin-bottom:0px; padding-bottom:15px; padding-left: 20px; padding-right:20px; padding-top: 10px; cursor: pointer;"
+                onclick="expand('masters')" onmouseover="shadow('UMassClick2')" onmouseout="unshadow('UMassClick2')">
+                <p style="width:50%; float:left; font-size:1.0em;margin-left:4px;color:#001C55;font-weight:600">Coursework</p>
+                <div id="caretmasters"><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+            </div>
+            <div id="Courses" style="max-width:1400px;display: inline-block; z-index: 0; text-align:center; position:relative; width:90%; margin-left:10px; margin-right:10px;padding-bottom:15px; padding-left: 20px; padding-right:20px; padding-top: 10px; margin-bottom:20px;">
+                <div class="coursemasters" style="display:none; z-index: 0; text-align:left; margin-bottom: 10px; position:relative; width:100%; background-color:#e4f7ff; padding-bottom:15px; padding-left: 20px; padding-right:20px; padding-top: 10px; cursor: pointer;">
+                    <p style="font-size:0.9em;color:#001C55;font-weight:400">
+                        <b>CS515: </b>Introduction to Computer Science,
+                        <b>CS574: </b>Programming Fundamentals,
+                        <b>CS590J: </b>Database Management Systems,
+                        <b>CS563: </b>Networking Fundamentals,
+                        <b>CS560: </b>Operating System,
+                        <b>CS578: </b>Distributed Computing and Systems,
+                        <b>CS661: </b>Secure Distributed Systems
+                </div>
+            </div>
+        </div>
+        <br>
+       
+
+    <div id="Skills" style="width:100%; text-align:center; float:left; padding-top:75px; min-width:600px;">
+        <h1 style="font-size:2.3em; text-align: center">Skills</h1><br>
+        <div style="display:inline-block; max-width:1400px;">
+            <div style="text-align:left; width:50%; padding-right: 20px; padding-left:60px; margin: 0 auto;">
+                <div style="padding-left:30px; padding-top:5px;font-size:1.0em;color:#001C55;">
+                    <p>
+                        <ul style="padding-bottom:10px;"><b>Languages:</b> Bash-(Linux) , PowerShell-(Windows).
+                        </ul>
+                    </p>
+                    <p>
+                        <ul style="padding-bottom:10px;"><b>Skills:</b>
+                            VMware Workspace ONE Deployment & Administration
+                            · Unified Endpoint Management (UEM)
+                            · Mobile Device Management (MDM)
+                            · Identity Manager Configuration & Integration
+                            · Application Management & Deployment
+                            · Access Control & Security Policies
+                            · Troubleshooting & Issue Resolution
+                            · Virtualization 
+                            · Mobility Management
+                            · Active Directory · Azure Active Directory · Server Monitoring
+                            · Android · iOS · Windows · MacOS · Linux · AirWatch
+                            · Workspace ONE Access · UAG · Technical Documentation & Reporting · Remote End-user Support & Training.
+                        </ul>
+                    </p>
+                    <p>
+                        <ul style="padding-bottom:10px;"><b>Tools:</b> 
+                            VMware Workstation,
+                            VirtualBox,
+                            Service Now,
+                            JIRA,
+                            Git.
+            
+                            
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+    <br>
+   
+    <div id="Projects" style="text-align:center; float:left; padding-top:75px; width:100%; min-width:600px;">
+        <h1 style="font-size:2.3em; text-align: center;">Projects</h1><br>
+        <h1 style="font-size:1.1em; text-align: center; font-weight:400; margin-top:-10px; margin-bottom:10px">Click on a project for more information</h1><br>
+
+        <div style="display: inline-block;  max-width:1600px; padding-left:50px; padding-right:50px;">
+            <div id="490A" style="z-index: 0;text-align:left; display: inline-block;position:relative; width:810px; height: 215px; margin-left:8px; margin-right:8px; background-color:rgb(166,225,250);padding:20px;  margin-bottom: 20px; padding: 30px; cursor: pointer;"
+                onmouseover="shadow('490A')" onmouseout="unshadow('490A')" onclick="modal('490AModal')">
+                <img src="icons8-repository-96.png" width="31px" style="float:left;padding:5px;">
+                <p style="float:left;font-size:1.4em;margin-left:4px;color:#001C55;font-weight:600">Wipro-VMware Workspace ONE Upgrade and Inter-migration</p><br>
+                <p style="float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:400">Objective: Upgrade and seamlessly migrate data, configurations, and workflows from the existing VMware Workspace ONE Unified Endpoint Management (UEM) tool to the latest version, ensuring minimal disruption and maximizing the benefits of upgraded features.</p><br>
+                <p style="float:left;margin-top: 10px; font-size:1.0em;color:#808080;font-weight:400">Updated on Dec 2021</p><br>
+                <div style="float:right;position:absolute;bottom:10px;right:17px">
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/python.png" width="35px" /><span class="tooltiptext">Python</span></div>
+                </div>
+            </div>
+        </div>
+            <div id="490AModal" class="modal">
+                <div class="modal-content" style="height:635px; text-align:center; width:1050px">
+                    <span class="close" id="490AModalClose">&times;</span>
+                    <p style="font-size:1.4em;color:#001C55;font-weight:600">VMware Workspace ONE UEM</p>
+                    <div style="margin-bottom:30px;float:left; width:50%; text-align: center; padding:10px; margin-top: 80px; background-color:#CCF0FF;">
+                        <img src="https://ulisesbecerro.com/wp-content/uploads/2020/10/image-3.png" width="500px" style="margin-top:20px;border-radius:0px; border-style:solid; border-color:#001C55;">
+                        <p style="margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: center; margin-bottom:20px;">VMware Workspace ONE Architecture</p>
+                    </div>
+                    <div style="float:right; width:50%; text-align:left; padding:10px; margin-top:45px; padding-left:20px">
+                        <p style="float:left;margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: left">
+                            Final project for Cisco CX-Cloud-Agent  where I worked on a team of 7 to collects telemetry data from customer network devices to deliver actionable insights for customer <br><br> Developed Python app for to run command on host from POD(Rest-api , flask , JWT , sqllite ,sqlalchemy) 
+                            Micro service upgradation with nested helm chart and rollback features implementation 
+                            Ubuntu OS Screen implementation to take input from user using LINUX GUI Programming 
+                            Upgrade Patch creation, CI-CD continuous testing and manage repository(dev,stage,prod) .
+                            Replace Kubeadm to k3s , Etcd to sqllite and docker to containerd for better performance
+                            Deploy multiple micro service successfully on Next Generation light-weight product
+                            Implementation to After successful deployment, new screen to show OTP using LINUX GUI PROGRAMMING
+                            Light-weight Traefik implementation and tested with hardening using host network to use Proxy
+                            IP reassignment in Kubeadm for dhcp support ,secure k8s env using IPTABLES 
+                            k8s hardening playbook -implement multiple plugin , admission controller ,authorization policy 
+                            <br><br>
+                        </p>
+                        <div style="text-align:center">
+                            <button id="rajibulGithub" style="background-color:#CCF0FF; border:none; width:180px; color:#001C55; padding:10px; cursor: pointer;" onmouseover="shadow('rajibulGithub')" onmouseout="unshadow('rajibulGithub')" onclick=" window.open('https://docs.vmware.com/en/VMware-Workspace-ONE-UEM/2306/UEM_Upgrade/GUID-AWT-UPGRADEINTRO.html','_blank')">
+                    <i class="fa fa-fw fa-github" style="color:#001C55"></i>
+                Project URL
+                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div id="Certification" style="text-align: center; float:left; padding-top: 75px; width: 100%; min-width: 600px;">
+        <h1 style="font-size: 2.3em;">Certification</h1>
+        <h2 style="font-size: 1.1em; font-weight: 400; margin-top: -10px; margin-bottom: 10px;">Click for more information</h2>
+
+       <!-- <div style="max-width: 1600px; margin: 0 auto; padding: 0 50px;">
+            <div id="492A" style="text-align: left; display: inline-block; width: 810px; height: 100px; background-color: rgb(166, 225, 250); padding: 30px; margin: 20px 8px; cursor: pointer;"
+                onmouseover="shadow('492A')" onmouseout="unshadow('492A')" onclick="modal('492AModal')">
+                <img src="award-icon.jpg" width="31px" style="float: left; padding: 5px;">
+                <p style="font-size: 1.4em; color: #001C55; font-weight: 600; margin-left: 4px;">Token Of Appreciation Award by Cisco</p>
+            </div>
+        </div> -->
+
+        <div style="max-width: 1600px; margin: 0 auto; padding: 0 50px;">
+            <a href="https://www.credly.com/badges/da478925-07eb-40cc-a314-eb65255f7680/linked_in?t=rpg7ij" target="_blank" rel="noopener noreferrer">
+                <div id="494A" style="text-align: left; display: inline-flex;; align-items: center; width: 810px; height: 100px; background-color: rgb(166, 225, 250); padding: 30px; margin: 20px 8px; cursor: pointer;"
+                    onmouseover="shadow('493A')" onmouseout="unshadow('494A')" onclick="modal('494AModal')">
+                    <div style="float: left; padding: 5px; width: 20px; height: 24px; background: url('award-icon.jpg') center center / cover no-repeat;"></div>
+                    <p style="font-size: 1.4em; color: #001C55; font-weight: 600; margin-left: 4px;">VMware Certified Professional - Digital Workspace 2023</p>
+                </div>
+            </a>
+        </div>
+
+        <div style="max-width: 1600px; margin: 0 auto; padding: 0 50px;">
+            <a href="https://skillsoft.digitalbadges.skillsoft.com/9c9f0b12-9b7a-4933-b7ba-357d756b3d9f" target="_blank" rel="noopener noreferrer">
+                <div id="495A" style="text-align: left; display: inline-flex;; align-items: center; width: 810px; height: 100px; background-color: rgb(166, 225, 250); padding: 30px; margin: 20px 8px; cursor: pointer;"
+                    onmouseover="shadow('493A')" onmouseout="unshadow('495A')" onclick="modal('495AModal')">
+                    <div style="float: left; padding: 5px; width: 20px; height: 24px; background: url('award-icon.jpg') center center / cover no-repeat;"></div>
+                    <p style="font-size: 1.4em; color: #001C55; font-weight: 600; margin-left: 4px;">Google Associate Cloud Engineer: Google Cloud Platform Ecosystem</p>
+                </div>
+            </a>
+        </div>
+
+        <div style="max-width: 1600px; margin: 0 auto; padding: 0 50px;">
+            <a href="https://skillsoft.digitalbadges.skillsoft.com/0df59678-1e3b-4a90-9b46-2f21ef7b4eda" target="_blank" rel="noopener noreferrer">
+                <div id="496A" style="text-align: left; display: inline-flex;; align-items: center; width: 810px; height: 100px; background-color: rgb(166, 225, 250); padding: 30px; margin: 20px 8px; cursor: pointer;"
+                    onmouseover="shadow('496A')" onmouseout="unshadow('496A')" onclick="modal('496AModal')">
+                    <div style="float: left; padding: 5px; width: 20px; height: 24px; background: url('award-icon.jpg') center center / cover no-repeat;"></div>
+                    <p style="font-size: 1.4em; color: #001C55; font-weight: 600; margin-left: 4px;">Introduction to Bash Scripting</p>
+                </div>
+            </a>
+        </div>
+
+
+        <div style="max-width: 1600px; margin: 0 auto; padding: 0 50px;">
+            <a href="http://ude.my/UC-L12SWZ1I" target="_blank" rel="noopener noreferrer">
+                <div id="496A" style="text-align: left; display: inline-flex;; align-items: center; width: 810px; height: 100px; background-color: rgb(166, 225, 250); padding: 30px; margin: 20px 8px; cursor: pointer;"
+                    onmouseover="shadow('496A')" onmouseout="unshadow('495A')" onclick="modal('496AModal')">
+                    <div style="float: left; padding: 5px; width: 20px; height: 24px; background: url('award-icon.jpg') center center / cover no-repeat;"></div>
+                    <p style="font-size: 1.4em; color: #001C55; font-weight: 600; margin-left: 4px;"> Administration of Red Hat Enterprise Linux 8</p>
+                </div>
+            </a>
+        </div>
+
+
+        <div style="max-width: 1600px; margin: 0 auto; padding: 0 50px;">
+            <a href="http://ude.my/UC-a3df076d-0e15-425e-85aa-a469b03bf860" target="_blank" rel="noopener noreferrer">
+                <div id="497A" style="text-align: left; display: inline-flex;; align-items: center; width: 810px; height: 100px; background-color: rgb(166, 225, 250); padding: 30px; margin: 20px 8px; cursor: pointer;"
+                    onmouseover="shadow('497A')" onmouseout="unshadow('495A')" onclick="modal('497AModal')">
+                    <div style="float: left; padding: 5px; width: 20px; height: 24px; background: url('award-icon.jpg') center center / cover no-repeat;"></div>
+                    <p style="font-size: 1.4em; color: #001C55; font-weight: 600; margin-left: 4px;"> Complete Linux Bash Shell Scripting with Real Life Examples</p>
+                </div>
+            </a>
+        </div>
+
+
+        <!-- <div style="max-width: 1600px; margin: 0 auto; padding: 0 50px;">
+            <a href="https://www.youracclaim.com/badges/30acf19f-08a6-4e68-9bdc-943ca8dbe957/linked_in_profile" target="_blank" rel="noopener noreferrer">
+                <div id="498A" style="text-align: left; display: inline-flex;; align-items: center; width: 810px; height: 100px; background-color: rgb(166, 225, 250); padding: 30px; margin: 20px 8px; cursor: pointer;"
+                    onmouseover="shadow('498A')" onmouseout="unshadow('495A')" onclick="modal('498AModal')">
+                    <div style="float: left; padding: 5px; width: 20px; height: 24px; background: url('award-icon.jpg') center center / cover no-repeat;"></div>
+                    <p style="font-size: 1.4em; color: #001C55; font-weight: 600; margin-left: 4px;">IBM Certified System Administrator</p>
+                </div>
+            </a>
+        </div> -->
+        
+        
+        
+    </div>
+    
+
+<!--    This is a multiline comment in HTML.
+            <div id="yshneyderman" style="z-index: 0;text-align:left; display: inline-block;position:relative; width:515px; height: 215px; margin-left:8px; margin-right:8px; background-color:rgb(166,225,250);padding:20px;  margin-bottom: 20px; padding: 30px; cursor: pointer;"
+                onmouseover="shadow('yshneyderman')" onmouseout="unshadow('yshneyderman')" onclick="modal('yshneydermanModal')">
+                <img src="icons8-repository-96.png" width="31px" style="float:left;padding:5px;">
+                <p style="float:left;font-size:1.4em;margin-left:4px;color:#001C55;font-weight:600">yshneyderman.github.io</p><br>
+                <p style="float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:400">A personal website template available to modify and use for your own. Based on Saad Pasta, Ashutosh Hathidara, Bootstrap Portfolio designs.</p><br>
+                <p style="float:left;margin-top: 10px; font-size:1.0em;color:#808080;font-weight:400">Updated on Aug 2020</p><br>
+                <div style="float:right;position:absolute;bottom:10px;right:17px">
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/javascript.png" width="35px" /><span class="tooltiptext">JavaScript</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/html-5.png" width="35px" /><span class="tooltiptext">HTML</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/css3.png" width="35px" /><span class="tooltiptext">CSS</span></div>
+                </div>
+            </div>
+
+            <div id="yshneydermanModal" class="modal">
+                <div class="modal-content" style="height:535px; text-align:center; width:950px">
+                    <span class="close" id="yshneydermanModalClose">&times;</span>
+                    <p style="font-size:1.4em;color:#001C55;font-weight:600">yshneyderman.github.io</p>
+                    <div style="margin-bottom:30px;float:left; width:50%; text-align: center; padding:10px; margin-top: 80px; background-color:#CCF0FF;">
+                        <img src="Images/Yshneyderman.png" width="400px" style="margin-top:20px;border-radius:0px; border-style:solid; border-color:#001C55;">
+                        <p style="margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: center; margin-bottom:20px;">Old Website view and layout.</p>
+                    </div>
+                    <div style="float:right; width:50%; text-align:left; padding:10px; margin-top:45px; padding-left:20px">
+                        <p style="float:left;margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: left">
+                            A personal website template available to modify and use for your own. Based on Saad Pasta, Ashutosh Hathidara, Bootstrap Portfolio designs, but all in single page HTML/CSS.<br><br> Started working on personal website in March 2019
+                            to keep track of educational and professional interests and showcase skills for potential employers. I've been adding to it anytime new experiences, skills, or classes come up that I believe would be useful to my profile as an
+                            applicant to academic programs or work opportunities.<br><br> Added personal and fun information over time. Feel free to copy and change for your own purposes!<br><br> Link to the GitHub repository:<br><br>
+                        </p>
+                        <div style="text-align:center">
+                            <button id="yshneydermanGithub" style="background-color:#CCF0FF; border:none; width:180px; color:#001C55; padding:10px; cursor: pointer;" onmouseover="shadow('yshneydermanGithub')" onmouseout="unshadow('yshneydermanGithub')" onclick=" window.open('https://github.com/yshneyderman/yshneyderman.github.io','_blank')">
+                    <i class="fa fa-fw fa-github" style="color:#001C55"></i>
+                GitHub Repository
+                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="30days" style="z-index: 0;text-align:left; display: inline-block;position:relative; width:515px; height: 215px; margin-left:8px; margin-right:8px;background-color:rgb(166,225,250);padding:20px;  margin-bottom: 20px; padding: 30px; cursor: pointer;"
+                onmouseover="shadow('30days')" onmouseout="unshadow('30days')" onclick="modal('30daysModal')">
+                <img src="icons8-repository-96.png" width="31px" style="float:left;padding:5px;">
+                <p style="float:left;font-size:1.4em;margin-left:4px;color:#001C55;font-weight:600">30DaysCoding.com</p><br>
+                <p style="float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:400">Website to teach coding practices and interview preparation. Wrote guides and documents.</p><br>
+                <p style="float:left;margin-top: 10px; font-size:1.0em;color:#808080;font-weight:400">Updated May 2020</p><br>
+                <div style="float:right;position:absolute;bottom:10px;right:17px">
+                    <div class="tooltip"><img src="https://img.icons8.com/fluent/48/000000/microsoft-word-2019.png" width="35px" /><span class="tooltiptext">Word</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/office/80/000000/pdf.png" width="35px" /><span class="tooltiptext">PDF</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/javascript.png" width="35px" /><span class="tooltiptext">JavaScript</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/html-5.png" width="35px" /><span class="tooltiptext">HTML</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/css3.png" width="35px" /><span class="tooltiptext">CSS</span></div>
+                </div>
+            </div>
+
+            <div id="30daysModal" class="modal">
+                <div class="modal-content" style="height:580px; text-align:center; width:950px">
+                    <span class="close" id="30daysModalClose">&times;</span>
+                    <p style="font-size:1.4em;color:#001C55;font-weight:600">30dayscoding.com</p>
+                    <div style="float:left; width:50%; text-align: center; padding:10px; margin-top: 60px; background-color:#CCF0FF;">
+                        <img src="Images/30days1.png" width="200px" style="margin-top:50px; border-radius:0px; border-style:solid; border-color:#001C55;display:inline-block">
+                        <img src="Images/30days2.png" width="200px" style="border-radius:0px; border-style:solid; border-color:#001C55;display:inline-block">
+                        <img src="Images/30days3.png" width="200px" style="border-radius:0px; border-style:solid; border-color:#001C55;display:inline-block">
+                        <img src="Images/30days4.png" width="200px" style="border-radius:0px; border-style:solid; border-color:#001C55; display:inline-block">
+                        <p style="margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: center; margin-bottom: 50px">Screenshots of website and interview guide.</p>
+                    </div>
+                    <div style="float:right; width:50%; text-align:left; padding:10px; margin-top:10px;">
+                        <p style="padding-left:20px;float:left;margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: left">
+                            An educational website I worked on with a good friend and fellow UMass Amherst CS major <a href="https://github.com/aryansingh12">Aryan Singh</a>. We both agreed that it was unfair for modern resources to help teach people to improve
+                            their skills were behind paywalls and only available to people who were members of certain clubs/universities so we sought to create a repository of all of our experience with CS interviews. We had both passed interviews in FAANG
+                            companies and reached out to other friends who had similar experience to put together free links, documents, and resources to help teach these concepts.<br><br> We started working in early 2020 and published the site when COVID-19
+                            was declared as a pandemic and everyone was at home - the perfect time to pick up/refresh these skills.<br><br> The initial LinkedIn posts recieved thousands of views and at some points the website had a few hundred users. The
+                            site was also featured in newsletters by the CICS department in emails recommending resources for career development. There are still current plans to add more free content such as resume parsers, more tips for acing an interview,
+                            and documents written by Aryan and I to discuss programming concepts like Arrays, Linked Lists, etc. with helpful graphics.<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        <div id="CS326" style="z-index: 0;text-align:left; display: inline-block;position:relative; width:515px; height: 215px; margin-left:8px; margin-right:8px;background-color:rgb(166,225,250);padding:20px;  margin-bottom: 20px; padding: 30px; cursor: pointer;" onmouseover="shadow('CS326')" onmouseout="unshadow('CS326')" onclick="modal('CS326Modal')">
+            <img src="icons8-repository-96.png" width="31px" style="float:left;padding:5px;">
+            <p style="float:left;font-size:1.4em;margin-left:4px;color:#001C55;font-weight:600">CS326 Projects</p><br>
+            <p style="float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:400">Small Web Development projects from textbook and one team-based large Full Stack App project at the end.</p><br>
+            <p style="float:left;margin-top: 10px; font-size:1.0em;color:#808080;font-weight:400">Updated Dec 2019</p><br>
+            <div style="float:right;position:absolute;bottom:10px;right:17px">
+            <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/nodejs.png" width="35px"/><span class="tooltiptext">NodeJS</span></div>
+            <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/mongodb.png" width="35px"/><span class="tooltiptext">MongoDB</span></div>
+            <div class="tooltip"><img src="https://static.thenounproject.com/png/117898-200.png" style="transform: rotate(-90deg)" width="35px"/><span class="tooltiptext">Mustache</span></div>
+            <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/javascript.png" width="35px"/><span class="tooltiptext">JavaScript</span></div>
+            <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/html-5.png" width="35px"/><span class="tooltiptext">HTML</span></div>
+            <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/css3.png" width="35px"/><span class="tooltiptext">CSS</span></div>
+            
+            </div>
+        </div>
+
+        <div id="CS326Modal" class="modal">
+            <div class="modal-content" style="height:535px; text-align:center; width:950px">
+            <span class="close" id="CS326ModalClose">&times;</span>
+            <p style="font-size:1.4em;color:#001C55;font-weight:600">CS326</p>
+                <div style="float:left; width:50%; text-align: center; padding:10px; margin-top: 60px; background-color:#CCF0FF;">
+                <img src="Images/TuneRater.png" width="400px" style="margin-top:50px; border-radius:0px; border-style:solid; border-color:#001C55;display:inline-block">
+                <p style="margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: center; margin-bottom: 50px">TuneRater final project screenshot.</p> 
+                </div>
+                <div style="float:right; width:50%; text-align:left; padding:10px; margin-top:10px;">
+                <p style="padding-left:20px;float:left;margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: left">
+                    A 300 level class covering Web Development which began with a basic introduction to HTML/CSS and proceeded to teach about fundamental web technologies, industry trends, and important full stack concepts. Class featured weekly mini-projects as well as a final group project of our choosing.<br>
+                    <br><b>TuneRater</b><br> Class formed teams of four and brainstormed a full stack application to develop that met the requirements of implementing certain web technologies and skills we learned through the year. The team worked in a Scrum/agile-like
+                            development flow with weekly standup meetings to work towards our goal of creating and presenting a fully functioning web app. The team came up with "TuneRater" - a site for aspiring musicians to create and share their music with
+                            a more art based community that could listen and critique their skills as an artist. We felt the need for this website in a world where Spotify and YouTube often did not provide the feedback an artist wants. The project uses Data
+                            Storage of music files, info, and account info on MongoDB, and a Node.js server to interact with (rating, comenting, and sending this info to the database)<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Nacam" style="z-index: 0;text-align:left; display: inline-block;position:relative; width:515px; height: 215px; margin-left:8px; margin-right:8px;background-color:rgb(166,225,250);padding:20px;  margin-bottom: 20px; padding: 30px; cursor: pointer;"
+                onmouseover="shadow('Nacam')" onmouseout="unshadow('Nacam')" onclick="modal('NacamModal')">
+                <img src="icons8-repository-96.png" width="31px" style="float:left;padding:5px;">
+                <p style="float:left;font-size:1.4em;margin-left:4px;color:#001C55;font-weight:600">North Andover CAM</p><br>
+                <p style="float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:400">Volunteer Projects for North Andover Community Access and Media.</p><br>
+                <p style="float:left;margin-top: 10px; font-size:1.0em;color:#808080;font-weight:400">Updated Apr 2020</p><br>
+                <div style="float:right;position:absolute;bottom:10px;right:17px">
+                    <div class="tooltip"><img src="https://img.icons8.com/fluent/48/000000/adobe-creative-cloud.png" width="35px" /><span class="tooltiptext">Creative Cloud</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/adobe-photoshop.png" width="35px" /><span class="tooltiptext">Photoshop</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/adobe-illustrator.png" width="35px" /><span class="tooltiptext">Illustrator</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/adobe-premiere-pro.png" width="35px" /><span class="tooltiptext">Premiere Pro</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/adobe-audition.png" width="35px" /><span class="tooltiptext">Audition</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/adobe-after-effects.png" width="35px" /><span class="tooltiptext">After Effects</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/final-cut-pro-x.png" width="35px" /><span class="tooltiptext">Final Cut Pro</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/adobe-lightroom.png" width="35px" /><span class="tooltiptext">Lightroom</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/adobe-xd.png" width="35px" /><span class="tooltiptext">XD</span></div>
+                    <div class="tooltip"><img src="https://vignette.wikia.nocookie.net/logopedia/images/1/1e/Adobe_Media_Encoder_%282012-2013%29.png/revision/latest/scale-to-width-down/340?cb=20160228175700" width="27px" style="margin-bottom:3px" /><span class="tooltiptext">Media Encoder</span></div>
+                    <div class="tooltip"><img src="https://img.icons8.com/color/48/000000/adobe-indesign.png" width="35px" /><span class="tooltiptext">InDesign</span></div>
+                </div>
+            </div>
+
+            <div id="NacamModal" class="modal">
+                <div class="modal-content" style="height:850px; text-align:center; width:950px">
+                    <span class="close" id="NacamModalClose">&times;</span>
+                    <p style="font-size:1.4em;color:#001C55;font-weight:600">NACAM</p>
+                    <div style="float:left; width:50%; text-align: center; padding:10px; margin-top: 60px; background-color:#CCF0FF;">
+                        <img src="Images/NACAMYefim.png" width="400px" style="margin-top:50px; border-radius:0px; border-style:solid; border-color:#001C55;display:inline-block">
+                        <p style="margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: center; margin-bottom: 50px">Picture of me directing a football game.</p>
+                    </div>
+                    <div style="float:right; width:50%; text-align:left; padding:10px; margin-top:10px;">
+                        <p style="padding-left:20px;float:left;margin-top: 10px; font-size:0.9em;color:#001C55;font-weight:400; text-align: left">
+                            <a href="https://northandovercam.org/">NACAM Website</a><br>
+                            <a href="https://www.youtube.com/channel/UC13W-m9GqbT1miA6x_5oaaw">NACAM YouTube</a><br><br> The North Andover Community Access and Media is an organization that produces community access programming on the Public, Education, and
+                            Government access channels in North Andover. The organization's members are able to use studio equipment for productions to be featured on the channels as well as have access to trainings and assist in real productions that the
+                            studio helps out with around town such as sporting events, concerts, town meeting, festivals, etc.<br><br> I joined NACAM in October 2013 and in my time in High School I accumulated the most volunteer hours over any other member
+                            and spent a lot of time learning software and techniques listed in my skills section. As a member I volunteered at a lot of NACAM productions in a variety of roles such as cameraman, director, technical director, audio, equipment
+                            setup, floor director, lighting, editor, etc. I worked with employees at NACAM to film community events linked below:<br><br>
+                            <a href="https://www.youtube.com/watch?v=rZrBxhH-jTo">8568F VEX Robotics Worlds Reveal 2017</a><br>
+                            <a href="https://www.youtube.com/watch?v=KHIBS7pYK-k">Mr. North Andover 2017</a><br>
+                            <a href="https://www.youtube.com/watch?v=fYVrW_1jExI">Spring Concert 2016</a><br>
+                            <a href="https://www.youtube.com/watch?v=w2XbsMBFklc">Spring Concert 2015</a><br>
+                            <a href="https://www.youtube.com/watch?v=4a-HMKvGnJE">Winter Concert 2016</a><br>
+                            <a href="https://www.youtube.com/watch?v=-iRlHl_BANo">All Town Band Festival 2016</a><br>
+                            <a href="https://www.youtube.com/watch?v=BrskaRoJR6A">North Andover Football Games</a><br>
+                            <a href="https://www.youtube.com/watch?v=nfJPpJNsgRs">North Andover Town Meeting 2017</a><br>
+                            <a href="https://www.youtube.com/watch?v=Y0CYsUPCaAc">North Andover Santa Parade 2019</a><br>
+                            <a href="https://www.youtube.com/watch?v=-BgGIh3Zzyc">Santa Call In Show</a><br>
+                            <a href="https://www.youtube.com/watch?v=062_H5Gi2XI">The North Andover Journal</a><br><br> These links represent a small amount of the work that is available on YouTube. I volunteered at a variety of these sorts of events as well
+                            as helping out with Youth Programs and other smaller projects around the town.<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+-->
+
+    <br>
+    <div id="Experience" style="width:100%; text-align:center; float:left; padding-top:75px; min-width:630px;">
+        <div style="display: inline-block;  max-width:1600px;">
+            <h1 style="font-size:2.3em; text-align: center">Experience</h1><br>
+            <div style="padding-left:20px; padding-right:20px;">
+                <div id="Boeing" style="max-width:1400px; z-index: 0; text-align:left; display: inline-block;position:relative; width:90%; margin-left:8px; margin-right:8px; margin-bottom: 30px; background-color:rgb(166,225,250);padding: 30px;">
+                    <img src="https://uasweekly.com/wp-content/uploads/2018/07/boeing-logo-png-transparent-copy.jpg" width="66px" style="float:left" />
+                    <p style="width:70%; float:left;font-size:1.4em;color:#001C55;font-weight:600; padding-top:4px; margin-left:12px">Associate VMware Workspace ONE Administrator</p><br>
+                    <p style="width:90%;float:left;margin-top: 15px;margin-left: 15px; font-size:1.0em;color:#001C55;font-weight:600;">Boeing</p><br>
+                    <p style="width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:600">Dec 2023 - Present </p><br>
+                    <p style="min-width: 460px; width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:100">
+                        Created Multiple for AWS Infra Appstack using Python and cloudformation<br> Design AWS Step Function to automate the process for Event Driven Cloud Native Architecture<br> 
+                        Crafting Cloud Infrastructure Excellence with AWS Automation</p><br>
+                </div>
+                <div id="Insight" style="max-width:1400px; z-index: 0; text-align:left; display: inline-block;position:relative; width:90%; margin-left:8px; margin-right:8px; margin-bottom: 30px; background-color:rgb(166,225,250);padding: 30px;">
+                    <img src="https://seekvectorlogo.com/wp-content/uploads/2018/11/insight-enterprises-inc-vector-logo-small.png" width="60px" style="float:left" />
+                    <p style="width:70%; float:left;font-size:1.4em;color:#001C55;font-weight:600; padding-top:4px; margin-left:12px">Mobility Engineer</p><br>
+                    <p style="width:90%;float:left;margin-top: 15px; margin-left: 15px;font-size:1.0em;color:#001C55;font-weight:600;">Insight</p><br>
+                    <p style="width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:600">Jan 2022 - Dec 2023 • 2 year</p><br>
+                    <p style="min-width: 460px; width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:100">
+                        Working as a Sr Mobility Engineer to deploy, configure, implement, documentation and Integration WS1 UEM solutions for various mobile devices(Android/iOS/Windows/MacOS/VRDevise)based on business requirements, best practices, and industry standards.
+                    </p>
+                </div>
+                <div id="Wipro" style="max-width:1400px; z-index: 0; text-align:left; display: inline-block;position:relative; width:90%; margin-left:8px; margin-right:8px; margin-bottom: 30px; background-color:rgb(166,225,250);padding: 30px;">
+                    <img src="https://www.financialexpress.com/wp-content/uploads/2017/05/wipro.jpg?w=660" width="60px" style="float:left" />
+                    <p style="width:70%; float:left;font-size:1.4em;margin-left:4px;color:#001C55;font-weight:600; padding-top:4px; margin-left:12px">MDM Administrator</p><br>
+                    <p style="width:90%;float:left;margin-top: 15px; margin-left: 15px;font-size:1.0em;color:#001C55;font-weight:600;">Wipro</p><br>
+                    <p style="width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:600">Oct 2017 - Jan 2022 • 4 yesr 4 mos</p><br>
+                    <p style="min-width: 460px;width:90%;float:left;margin-top: 10px; font-size:1.0em;color:#001C55;font-weight:100">
+                        Specialized as a MDM Administrator(AirWatch) to support all banking users via call/mail/remote for application install/deploy/upgrade and support to enrolling all users in banking environment and aslo all technical support via call/mail/remote to users. after a year start working on Mobile Device Management. </p><br>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let mainNav = document.getElementById("js-menu");
+    let navBarToggle = document.getElementById("js-navbar-toggle");
+
+    navBarToggle.addEventListener("click", function() {
+        mainNav.classList.toggle("active");
+    });
+</script>
+
+<script>
+    function shadow(id) {
+        let div = document.getElementById(id);
+        div.style.boxShadow = "0 4px 9px 0 rgba(0, 0, 0, 0.2)";
+    }
+
+    function unshadow(id) {
+        let div = document.getElementById(id);
+        div.style.boxShadow = "";
+    }
+
+    function expand(id) {
+        let div = document.getElementById("caret" + id);
+        let elements = document.getElementsByClassName("course" + id);
+        if (div.innerHTML === '<i class="fa fa-caret-down" aria-hidden="true"></i>') {
+            div.innerHTML = '<i class="fa fa-caret-up" aria-hidden="true"></i>';
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = "inline-block";
+            }
+        } else {
+            div.innerHTML = '<i class="fa fa-caret-down" aria-hidden="true"></i>';
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = "none";
+            }
+        }
+    }
+</script>
+<script>
+    let list = document.getElementsByClassName("modal")
+    for (let i = 0; i < list.length; i++) {
+        list[i].style.display = "none";
+    }
+
+    function modal(id) {
+        console.log(id);
+        var modal = document.getElementById(id);
+        console.log(modal);
+        // Get the button that opens the modal
+        var btn = document.getElementById(id + "Button");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementById(id + "Close");
+        console.log(span);
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks the button, open the modal 
+        modal.style.display = "block";
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+</script>
+
+
+</html>
